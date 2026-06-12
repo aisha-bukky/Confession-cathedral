@@ -1,0 +1,461 @@
+:root {
+  /* Gothic Cathedral Color Palette */
+  --bg-main: #0a0712;
+  --bg-gradient: radial-gradient(circle at 50% 10%, #1a102e 0%, #0a0712 70%);
+  --color-glass: rgba(18, 12, 33, 0.65);
+  --color-glass-card: rgba(28, 20, 50, 0.4);
+  --border-glow: rgba(139, 92, 246, 0.15);
+  --border-active: rgba(241, 178, 74, 0.4);
+  
+  --gold-candle: #f1b24a;
+  --gold-glow: rgba(241, 178, 74, 0.25);
+  --gold-active: #fbbf24;
+  
+  --crimson-alert: #ef4444;
+  --crimson-glow: rgba(239, 68, 68, 0.4);
+  
+  --text-primary: #e2daf0;
+  --text-secondary: #9c92b3;
+  --text-title: #f3eefc;
+  
+  /* Typography */
+  --font-gothic: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+  
+  /* Standard Page Configuration */
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-y: scroll;
+}
+
+/* Cathedral Background Glow Effect */
+.bg-ambience {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(241, 178, 74, 0.05) 0%, transparent 40%);
+}
+
+#root {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Aesthetics */
+header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeInDown 1.2s ease-out;
+}
+
+h1.cathedral-title {
+  font-family: var(--font-gothic);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 10px rgba(241, 178, 74, 0.2),
+    0 0 30px rgba(139, 92, 246, 0.1);
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Cathedral Cross/Divider Decoration */
+.header-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.header-divider::before,
+.header-divider::after {
+  content: '';
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--border-active), transparent);
+}
+
+.header-divider span {
+  color: var(--gold-candle);
+  font-size: 1.2rem;
+  text-shadow: 0 0 8px var(--gold-glow);
+}
+
+.cathedral-subtitle {
+  font-family: var(--font-gothic);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+/* Altar/Form Styling */
+.confession-altar {
+  background: var(--color-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glow);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 48px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.confession-altar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-candle), transparent);
+  opacity: 0.6;
+}
+
+.confession-altar:focus-within {
+  border-color: var(--border-active);
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(241, 178, 74, 0.08),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.textarea-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.confession-input {
+  width: 100%;
+  height: 160px;
+  background: rgba(8, 6, 15, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  resize: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.confession-input:focus {
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(8, 6, 15, 0.85);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.confession-input::placeholder {
+  color: rgba(156, 146, 179, 0.45);
+  font-style: italic;
+}
+
+/* Altar Action Controls */
+.altar-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Character Counter */
+.char-counter {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.char-counter span.count {
+  font-weight: 600;
+  font-family: var(--font-gothic);
+}
+
+/* Limit reached styles */
+.char-counter.limit-near {
+  color: #fb7185;
+}
+
+.char-counter.limit-reached {
+  color: var(--crimson-alert);
+  text-shadow: 0 0 8px var(--crimson-glow);
+  animation: pulse-red 1s infinite alternate;
+}
+
+/* Submit Button */
+.submit-btn {
+  font-family: var(--font-gothic);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0b0712;
+  background: linear-gradient(135deg, var(--gold-candle) 0%, #d97706 100%);
+  border: none;
+  border-radius: 30px;
+  padding: 12px 32px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(241, 178, 74, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(241, 178, 74, 0.4),
+    0 0 10px rgba(241, 178, 74, 0.2);
+  background: linear-gradient(135deg, var(--gold-active) 0%, #ea580c 100%);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: rgba(45, 38, 65, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(156, 146, 179, 0.3);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Feed Title */
+.feed-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.feed-header h2 {
+  font-family: var(--font-gothic);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-title);
+  text-transform: uppercase;
+}
+
+.feed-header-line {
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(139, 92, 246, 0.2), transparent);
+}
+
+/* Feed & Confession Cards */
+.confessions-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.empty-feed {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-gothic);
+  letter-spacing: 1px;
+  background: rgba(18, 12, 33, 0.25);
+  border-radius: 12px;
+  border: 1px dashed rgba(139, 92, 246, 0.1);
+}
+
+.confession-card {
+  background: var(--color-glass-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: cardFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.confession-card:hover {
+  border-color: rgba(241, 178, 74, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.confession-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.anon-badge {
+  font-family: var(--font-gothic);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold-candle);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.confession-time {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.confession-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pulse-red {
+  from {
+    text-shadow: 0 0 4px rgba(239, 68, 68, 0.3);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  }
+}
+
+/* Custom Scrollbar for elegant aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(241, 178, 74, 0.4);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  #root {
+    padding: 24px 16px;
+  }
+  
+  h1.cathedral-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .confession-altar {
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+  
+  .textarea-container {
+    margin-bottom: 16px;
+  }
+  
+  .confession-input {
+    height: 130px;
+    padding: 14px;
+    font-size: 1rem;
+  }
+  
+  .altar-actions {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .char-counter {
+    justify-content: center;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
