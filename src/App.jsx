@@ -1,29 +1,7 @@
 import { useState, useEffect } from 'react';
 
-// Seeding some initial atmospheric confessions so the feed has content on first load.
-const INITIAL_CONFESSIONS = [
-  {
-    key: 'init-1',
-    text: "I write poetry about strangers I pass on the street. They will never know they are immortalized in the notebook under my floorboards.",
-    timestamp: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
-  },
-  {
-    key: 'init-2',
-    text: "I pretended to lose my wedding ring just to see how much my spouse cared. Seeing their heartbreak made me find it immediately, but the guilt of that lie still haunts me every day.",
-    timestamp: new Date(Date.now() - 1000 * 60 * 120), // 2 hours ago
-  },
-  {
-    key: 'init-3',
-    text: "I secretly buy groceries for my elderly neighbor and leave them on her porch, claiming it's an anonymous charity program. She thinks there's an angel watching over her, but it's just the quiet kid from next door.",
-    timestamp: new Date(Date.now() - 1000 * 60 * 480), // 8 hours ago
-  }
-];
-
 function App() {
-  const [confessions, setConfessions] = useState(() => {
-    // Attempt to keep in-memory but seed with the initial list
-    return INITIAL_CONFESSIONS;
-  });
+  const [confessions, setConfessions] = useState([]);
   const [text, setText] = useState('');
   const [timeTicker, setTimeTicker] = useState(Date.now());
 
@@ -46,7 +24,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const cleanText = text.trim();
-    
+
     // Validate empty or all-whitespace submissions
     if (!cleanText) return;
 
@@ -59,7 +37,7 @@ function App() {
 
     // Prepend new confession (newest first)
     setConfessions((prev) => [newConfession, ...prev]);
-    
+
     // Clear input
     setText('');
   };
@@ -68,7 +46,7 @@ function App() {
   const charCount = text.length;
   const isLimitReached = charCount >= 280;
   const isLimitNear = charCount >= 250;
-  
+
   // Submit is active only if there is non-whitespace text
   const isFormValid = text.trim().length > 0 && charCount <= 280;
 
@@ -76,11 +54,11 @@ function App() {
   const formatTime = (date) => {
     // Formats absolute time: e.g. "2:34 PM"
     const timeString = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-    
+
     // Relative time calculation
     const diffMs = Date.now() - date.getTime();
     const diffMins = Math.floor(diffMs / (1000 * 60));
-    
+
     if (diffMins < 1) {
       return `Just now (at ${timeString})`;
     } else if (diffMins < 60) {
@@ -99,7 +77,7 @@ function App() {
     <>
       {/* Decorative ambient gradients */}
       <div className="bg-ambience" aria-hidden="true" />
-      
+
       <header>
         <h1 className="cathedral-title">Confession Cathedral</h1>
         <div className="header-divider" aria-hidden="true">
@@ -122,9 +100,9 @@ function App() {
                 aria-label="Your confession"
               />
             </div>
-            
+
             <div className="altar-actions">
-              <div 
+              <div
                 className={`char-counter ${isLimitReached ? 'limit-reached' : isLimitNear ? 'limit-near' : ''}`}
                 aria-live="polite"
               >
@@ -132,9 +110,9 @@ function App() {
                 {isLimitReached && <span className="warning-text"> (Limit reached)</span>}
               </div>
 
-              <button 
-                type="submit" 
-                className="submit-btn" 
+              <button
+                type="submit"
+                className="submit-btn"
                 disabled={!isFormValid}
               >
                 Confess
